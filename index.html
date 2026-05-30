@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>STEPHEN JUE</header>
+    <header>
+      <button class="identity">Stephen Jue</button>
+      <div class="contact-panel">
+        <span id="email"></span>
+      </div>
+    </header>
     <main class="field-wrapper">
       <div class="field">
         <div class="tile">
@@ -48,5 +53,13 @@
         </div>
       </div>
     </main>
+    <script>
+      const user = "hello";
+      const domain = "stephenjue.com";
+
+      const email = `${user}@${domain}`;
+
+      document.getElementById("email").innerHTML = `<a href="mailto:${email}">${email}</a>`;
+    </script>
   </body>
 </html>
