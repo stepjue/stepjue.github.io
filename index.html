@@ -14,52 +14,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <button class="identity">Stephen Jue</button>
+    <header class="identity">
+      <a class="identity__name" href="/">Stephen Jue</a>
+
       <div class="contact-panel">
-        <span id="email"></span>
+        <a href="mailto:hello@stephenjue.com">hello@stephenjue.com</a>
       </div>
     </header>
-    <main class="field-wrapper">
-      <div class="field">
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 01</div>
-        </div>
-
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 02</div>
-        </div>
-
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 03</div>
-        </div>
-
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 04</div>
-        </div>
-
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 05</div>
-        </div>
-
-        <div class="tile">
-          <div class="image"></div>
-          <div class="label">SET 06</div>
-        </div>
-      </div>
+    <main class="field">
+      <a class="set" href="set-01/index.html">
+        <img src="set-01/thumbs/01.jpg" alt="" />
+        <div class="label">Set 01</div>
+      </a>
     </main>
-    <script>
-      const user = "hello";
-      const domain = "stephenjue.com";
-
-      const email = `${user}@${domain}`;
-
-      document.getElementById("email").innerHTML = `<a href="mailto:${email}">${email}</a>`;
-    </script>
   </body>
 </html>

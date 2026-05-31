@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Set 01</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <header class="identity">
+      <a class="identity__name" href="/">Stephen Jue</a>
+
+      <div class="contact-panel">
+        <a href="mailto:hello@stephenjue.com">hello@stephenjue.com</a>
+      </div>
+
+      <div class="set-meta">Set 01</div>
+    </header>
+
+
+    <main class="grid">
+      <a href="web/01.jpg" class="tile">
+        <img src="thumbs/01.jpg" alt="" />
+      </a>
+
+      <a href="web/02.jpg" class="tile">
+        <img src="thumbs/02.jpg" alt="" />
+      </a>
+
+      <a href="web/03.jpg" class="tile">
+        <img src="thumbs/03.jpg" alt="" />
+      </a>
+    </main>
+    <div id="lightbox" class="lightbox">
+      <img id="lightbox-img" src="" />
+    </div>
+
+    <script>
+      const lightbox = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+
+      document.querySelectorAll(".tile").forEach((tile) => {
+        tile.addEventListener("click", (e) => {
+          e.preventDefault();
+          img.src = tile.href;
+          lightbox.classList.add("open");
+        });
+      });
+
+      lightbox.addEventListener("click", () => {
+        lightbox.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>
