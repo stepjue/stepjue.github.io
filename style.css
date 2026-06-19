@@ -1,98 +1,87 @@
-/* =========================
-   1. BASE
-========================= */
+html {
+  color-scheme: light;
+}
 
-html,
 body {
   margin: 0;
-  padding: 0;
-
+  min-width: 320px;
   font-family: "Lekton", monospace;
   font-weight: 400;
-
   background: #fff;
   color: #111;
 }
 
 a {
+  color: inherit;
   -webkit-user-drag: none;
 }
 
 img {
+  display: block;
   -webkit-user-drag: none;
   user-select: none;
-  display: block;
+}
+
+.site-title {
+  margin: 0;
+  font: inherit;
+}
+
+.identity,
+.contact {
+  position: fixed;
+  z-index: 9999;
+
+  font-family: "Lekton", monospace;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  padding: 4px 8px;
 }
 
 .identity {
-  position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 9999;
 }
 
-.identity a {
-  color: #111;
-}
-
-.identity__name {
-  all: unset;
-  display: inline-block;
-
-  font-family: "Lekton", monospace;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  background: rgba(255, 255, 255, 0.92);
-  padding: 4px 8px;
-
-  color: #111;
-  cursor: pointer;
-}
-
-.contact-panel {
-  margin-top: 6px;
-  font-size: 16px;
-
-  background: rgba(255, 255, 255, 0.92);
-  padding: 4px 8px;
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-
-  transition: 0.15s ease;
-}
-
-.identity:hover .contact-panel,
-.identity:focus-within .contact-panel {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.set-meta {
-  position: fixed;
-  top: 20px;
+.contact {
   right: 20px;
-  z-index: 9999;
+  bottom: 20px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 
-  font-family: "Lekton", monospace;
-  font-size: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.contact a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  background: rgba(255, 255, 255, 0.92);
-  padding: 4px 8px;
+.contact a:hover {
+  text-decoration: underline;
+}
 
+.identity:focus-visible,
+.contact a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.tile:focus,
+.lightbox-close:focus {
+  outline: none;
+}
+
+.lightbox-close:focus-visible {
+  text-decoration: underline;
 }
 
 .grid {
   column-count: 2;
   column-gap: 24px;
-
   max-width: 1200px;
   margin: 0 auto;
   padding: 120px 24px 60px;
@@ -101,26 +90,19 @@ img {
 .tile {
   display: inline-block;
   width: 100%;
-
   break-inside: avoid;
   margin: 0 0 24px;
-
   text-decoration: none;
-  color: inherit;
+  cursor: zoom-in;
 }
 
 .tile img {
   width: 100%;
   height: auto;
-  display: block;
 }
 
-.label {
-  position: static;
-  margin-top: 8px;
-
-  font-size: 16px;
-  text-transform: uppercase;
+.column-start {
+  break-before: column;
 }
 
 @media (max-width: 700px) {
@@ -133,37 +115,70 @@ img {
   .tile {
     margin-bottom: 20px;
   }
+
+  .column-start {
+    break-before: auto;
+  }
 }
 
 .lightbox {
   position: fixed;
   inset: 0;
-
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255, 255, 255, 0.98);
-  z-index: 2000;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  padding: clamp(32px, 5vw, 64px) 5vw 104px;
+  background: white;
+  color: #111;
+  overflow: hidden;
 }
 
-.lightbox.open {
-  display: flex;
+.lightbox:not([open]) {
+  display: none;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+}
+
+.lightbox::backdrop {
+  background: white;
 }
 
 .lightbox img {
-  max-width: 90vw;
-  max-height: 90vh;
-  cursor: pointer;
+  max-width: 100%;
+  max-height: calc(100dvh - 180px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
-.lightbox::after {
-  content: "click to close";
-  position: absolute;
-  bottom: 24px;
-
+.lightbox-close {
+  position: fixed;
+  left: 50%;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  border: 0;
+  padding: 10px 14px;
+  font: inherit;
   font-size: 14px;
   letter-spacing: 0.08em;
+  text-transform: lowercase;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+}
 
-  opacity: 0.6;
+.lightbox-close:hover {
+  text-decoration: underline;
+}
+
+.lightbox-open {
+  overflow: hidden;
 }

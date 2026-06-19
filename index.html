@@ -4,36 +4,209 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Stephen Jue</title>
+    <meta
+      name="description"
+      content="A photography portfolio by Stephen Jue."
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="identity">
-      <a class="identity__name" href="/">Stephen Jue</a>
-      <div class="contact-panel">
-        <span id="email"></span>
-      </div>
+    <header>
+      <h1 class="site-title">
+        <a class="identity" href="./">Stephen Jue</a>
+      </h1>
     </header>
-    <main class="grid">
-      <a class="tile" href="set.html?set=01">
-        <img src="images/set-01/thumbs/02.jpg" alt="">
-        <div class="label">marsh</div>
+
+    <main class="grid" aria-label="Photography portfolio">
+      <a
+        class="tile"
+        href="images/marsh/web/01.jpg"
+        aria-label="View: A heron perched on a fallen tree in pale marsh water"
+      >
+        <img
+          src="images/marsh/thumbs/01.jpg"
+          width="1000"
+          height="563"
+          alt="A heron perched on a fallen tree in pale marsh water"
+          fetchpriority="high"
+        />
       </a>
-      <a class="tile" href="set.html?set=03">
-        <img src="images/set-03/thumbs/01.jpg" alt="">
-        <div class="label">geom</div>
+      <a
+        class="tile"
+        href="images/maine/web/01.jpg"
+        aria-label="View: Orange and white harbor reflections rippling across water"
+      >
+        <img
+          src="images/maine/thumbs/01.jpg"
+          width="1000"
+          height="714"
+          alt="Orange and white harbor reflections rippling across water"
+          loading="lazy"
+          decoding="async"
+        />
       </a>
-      <a class="tile" href="set.html?set=02">
-        <img src="images/set-02/thumbs/01.jpg" alt="">
-        <div class="label">foss</div>
+      <a
+        class="tile"
+        href="images/foss/web/05.jpg"
+        aria-label="View: Sheep scattered across a bright green hillside"
+      >
+        <img
+          src="images/foss/thumbs/05.jpg"
+          width="1000"
+          height="667"
+          alt="Sheep scattered across a bright green hillside"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <a
+        class="tile"
+        href="images/periphery/web/01.jpg"
+        aria-label="View: Geometric industrial buildings beneath an overcast sky"
+      >
+        <img
+          src="images/periphery/thumbs/01.jpg"
+          width="1000"
+          height="750"
+          alt="Geometric industrial buildings beneath an overcast sky"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <a
+        class="tile"
+        href="images/periphery/web/05.jpg"
+        aria-label="View: A blue fire hydrant and its shadow against a brick wall"
+      >
+        <img
+          src="images/periphery/thumbs/05.jpg"
+          width="750"
+          height="1000"
+          alt="A blue fire hydrant and its shadow against a brick wall"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+
+      <a
+        class="tile column-start"
+        href="images/foss/web/02.jpg"
+        aria-label="View: Waterfall spray and a rainbow in an abstracted landscape"
+      >
+        <img
+          src="images/foss/thumbs/02.jpg"
+          width="1000"
+          height="667"
+          alt="Waterfall spray and a rainbow in an abstracted landscape"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <a
+        class="tile"
+        href="images/marsh/web/02.jpg"
+        aria-label="View: A solitary rock emerging from misty marsh water"
+      >
+        <img
+          src="images/marsh/thumbs/02.jpg"
+          width="1000"
+          height="563"
+          alt="A solitary rock emerging from misty marsh water"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <a
+        class="tile"
+        href="images/periphery/web/06.jpg"
+        aria-label="View: A boarded door centered in a red corrugated wall"
+      >
+        <img
+          src="images/periphery/thumbs/06.jpg"
+          width="562"
+          height="1000"
+          alt="A boarded door centered in a red corrugated wall"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <a
+        class="tile"
+        href="images/maine/web/06.jpg"
+        aria-label="View: A car in front of a small No Parking sign on a white door"
+      >
+        <img
+          src="images/maine/thumbs/06.jpg"
+          width="562"
+          height="1000"
+          alt="A car in front of a small No Parking sign on a white door"
+          loading="lazy"
+          decoding="async"
+        />
       </a>
     </main>
-    <script src="sets.js"></script>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Image preview">
+      <img id="lightbox-img" alt="" />
+      <button class="lightbox-close" type="button">Close</button>
+    </dialog>
+
+    <footer>
+      <span class="contact" id="email"></span>
+    </footer>
+
+    <script>
+      const tiles = document.querySelectorAll(".tile");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeButton = lightbox.querySelector(".lightbox-close");
+      let activeTile;
+
+      tiles.forEach((tile) => {
+        tile.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          const thumbnail = tile.querySelector("img");
+          activeTile = tile;
+          lightboxImg.src = tile.href;
+          lightboxImg.alt = thumbnail.alt;
+          document.body.classList.add("lightbox-open");
+          lightbox.showModal();
+        });
+      });
+
+      function closeLightbox() {
+        if (lightbox.open) lightbox.close();
+      }
+
+      function resetLightbox() {
+        document.body.classList.remove("lightbox-open");
+        lightboxImg.removeAttribute("src");
+        lightboxImg.alt = "";
+        activeTile?.focus();
+        activeTile = undefined;
+      }
+
+      closeButton.addEventListener("click", closeLightbox);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      lightbox.addEventListener("close", resetLightbox);
+
+      const email = ["hello", "@", "stephenjue", ".", "com"].join("");
+      const emailLink = document.createElement("a");
+      emailLink.href = `mailto:${email}`;
+      emailLink.textContent = "contact";
+      document.getElementById("email").append(emailLink);
+    </script>
   </body>
 </html>
