@@ -15,6 +15,22 @@
       href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&amp;display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="preload"
+      as="image"
+      href="images/marsh/thumbs/01.jpg"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="images/foss/thumbs/06.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -25,116 +41,132 @@
     </header>
 
     <main class="grid" aria-label="Photography portfolio">
-      <a
-        class="tile"
-        href="images/marsh/web/01.jpg"
-        aria-label="View: A heron perched on a fallen tree in pale marsh water"
-      >
-        <img
-          src="images/marsh/thumbs/01.jpg"
-          width="1000"
-          height="563"
-          alt="A heron perched on a fallen tree in pale marsh water"
-          fetchpriority="high"
-        />
-      </a>
-      <a
-        class="tile"
-        href="images/maine/web/01.jpg"
-        aria-label="View: Orange and white harbor reflections rippling across water"
-      >
-        <img
-          src="images/maine/thumbs/01.jpg"
-          width="1000"
-          height="714"
-          alt="Orange and white harbor reflections rippling across water"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <a
-        class="tile"
-        href="images/foss/web/01.jpg"
-        aria-label="View: Looking up from under a waterfall"
-      >
-        <img
-          src="images/foss/thumbs/01.jpg"
-          alt="Looking up from under a waterfall"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <a
-        class="tile"
-        href="images/periphery/web/01.jpg"
-        aria-label="View: Geometric industrial buildings beneath an overcast sky"
-      >
-        <img
-          src="images/periphery/thumbs/01.jpg"
-          width="1000"
-          height="750"
-          alt="Geometric industrial buildings beneath an overcast sky"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <a
-        class="tile"
-        href="images/foss/web/06.jpg"
-        aria-label="View: White church with a bright red roof centered against sweeping hillsides"
-      >
-        <img
-          src="images/foss/thumbs/06.jpg"
-          alt="White church with a bright red roof centered against sweeping hillsides"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
+      <div class="column">
+        <a
+          class="tile"
+          href="images/marsh/web/01.jpg"
+          aria-label="View: A heron perched on a fallen tree in pale marsh water"
+        >
+          <img
+            src="images/marsh/thumbs/01.jpg"
+            width="1000"
+            height="563"
+            alt="A heron perched on a fallen tree in pale marsh water"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </a>
+        <a
+          class="tile"
+          href="images/maine/web/01.jpg"
+          aria-label="View: Orange and white harbor reflections rippling across water"
+        >
+          <img
+            src="images/maine/thumbs/01.jpg"
+            width="1000"
+            height="714"
+            alt="Orange and white harbor reflections rippling across water"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a
+          class="tile"
+          href="images/foss/web/01.jpg"
+          aria-label="View: Looking up from under a waterfall"
+        >
+          <img
+            src="images/foss/thumbs/01.jpg"
+            width="800"
+            height="1000"
+            alt="Looking up from under a waterfall"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a
+          class="tile"
+          href="images/periphery/web/01.jpg"
+          aria-label="View: Geometric industrial buildings beneath an overcast sky"
+        >
+          <img
+            src="images/periphery/thumbs/01.jpg"
+            width="1000"
+            height="750"
+            alt="Geometric industrial buildings beneath an overcast sky"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
 
-      <a
-        class="tile"
-        href="images/marsh/web/03.jpg"
-        aria-label="View: A Rocks emerging from misty marsh water"
-      >
-        <img
-          src="images/marsh/thumbs/03.jpg"
-          width="1000"
-          height="563"
-          alt="A Rocks emerging from misty marsh water"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <a class="tile" href="images/other/other-web-1.jpg">
-        <img
-          src="images/other/other-thumb-1.jpg"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-
-      <!-- COLUMN START-->
-      <a
-        class="tile column-start"
-        href="images/foss/web/02.jpg"
-        aria-label="View: Waterfall spray and a rainbow in an abstracted landscape"
-      >
-        <img
-          src="images/foss/thumbs/02.jpg"
-          width="1000"
-          height="667"
-          alt="Waterfall spray and a rainbow in an abstracted landscape"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <a class="tile" href="images/other/other-web-2.jpg">
-        <img
-          src="images/other/other-thumb-2.jpg"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
+      <div class="column">
+        <a
+          class="tile"
+          href="images/foss/web/06.jpg"
+          aria-label="View: White church with a bright red roof centered against sweeping hillsides"
+        >
+          <picture>
+            <source srcset="images/foss/thumbs/06.webp" type="image/webp" />
+            <img
+              src="images/foss/thumbs/06.jpg"
+              width="1000"
+              height="667"
+              alt="White church with a bright red roof centered against sweeping hillsides"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </picture>
+        </a>
+        <a
+          class="tile"
+          href="images/marsh/web/03.jpg"
+          aria-label="View: Rocks emerging from misty marsh water"
+        >
+          <img
+            src="images/marsh/thumbs/03.jpg"
+            width="1000"
+            height="563"
+            alt="Rocks emerging from misty marsh water"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a class="tile" href="images/other/other-web-1.jpg">
+          <img
+            src="images/other/other-thumb-1.jpg"
+            width="1000"
+            height="562"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a
+          class="tile"
+          href="images/foss/web/02.jpg"
+          aria-label="View: Waterfall spray and a rainbow in an abstracted landscape"
+        >
+          <img
+            src="images/foss/thumbs/02.jpg"
+            width="1000"
+            height="667"
+            alt="Waterfall spray and a rainbow in an abstracted landscape"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <a class="tile" href="images/other/other-web-2.jpg">
+          <img
+            src="images/other/other-thumb-2.jpg"
+            width="1000"
+            height="1000"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
     </main>
 
     <dialog class="lightbox" id="lightbox" aria-label="Image preview">
@@ -154,10 +186,34 @@
       let activeTile;
 
       tiles.forEach((tile) => {
+        const thumbnail = tile.querySelector("img");
+
+        function revealThumbnail() {
+          const reveal = () => {
+            requestAnimationFrame(() => tile.classList.add("is-loaded"));
+          };
+
+          if (thumbnail.decode) {
+            thumbnail.decode().then(reveal, reveal);
+          } else {
+            reveal();
+          }
+        }
+
+        if (thumbnail.complete) {
+          revealThumbnail();
+        } else {
+          thumbnail.addEventListener("load", revealThumbnail, { once: true });
+          thumbnail.addEventListener(
+            "error",
+            () => tile.classList.add("is-loaded"),
+            { once: true },
+          );
+        }
+
         tile.addEventListener("click", (event) => {
           event.preventDefault();
 
-          const thumbnail = tile.querySelector("img");
           activeTile = tile;
           lightboxImg.src = tile.href;
           lightboxImg.alt = thumbnail.alt;
