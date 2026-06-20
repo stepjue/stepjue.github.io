@@ -170,7 +170,10 @@
     </main>
 
     <dialog class="lightbox" id="lightbox" aria-label="Image preview">
-      <img id="lightbox-img" alt="" />
+      <div class="lightbox-media">
+        <img class="lightbox-preview" id="lightbox-preview" alt="" />
+        <img class="lightbox-full" id="lightbox-img" alt="" decoding="async" />
+      </div>
       <button class="lightbox-close" type="button">Close</button>
     </dialog>
 
@@ -181,9 +184,11 @@
     <script>
       const tiles = document.querySelectorAll(".tile");
       const lightbox = document.getElementById("lightbox");
+      const lightboxPreview = document.getElementById("lightbox-preview");
       const lightboxImg = document.getElementById("lightbox-img");
       const closeButton = lightbox.querySelector(".lightbox-close");
       let activeTile;
+      let lightboxLoadId = 0;
 
       tiles.forEach((tile) => {
         const thumbnail = tile.querySelector("img");
@@ -214,11 +219,35 @@
         tile.addEventListener("click", (event) => {
           event.preventDefault();
 
+          const loadId = ++lightboxLoadId;
           activeTile = tile;
-          lightboxImg.src = tile.href;
+          lightbox.classList.remove("is-loaded", "is-error");
+          lightboxPreview.src = thumbnail.currentSrc || thumbnail.src;
           lightboxImg.alt = thumbnail.alt;
+          lightboxImg.removeAttribute("src");
           document.body.classList.add("lightbox-open");
           lightbox.showModal();
+
+          lightboxImg.onload = () => {
+            const reveal = () => {
+              if (loadId !== lightboxLoadId || !lightbox.open) return;
+              requestAnimationFrame(() => lightbox.classList.add("is-loaded"));
+            };
+
+            if (lightboxImg.decode) {
+              lightboxImg.decode().then(reveal, reveal);
+            } else {
+              reveal();
+            }
+          };
+
+          lightboxImg.onerror = () => {
+            if (loadId === lightboxLoadId) {
+              lightbox.classList.add("is-error");
+            }
+          };
+
+          lightboxImg.src = tile.href;
         });
       });
 
@@ -227,9 +256,14 @@
       }
 
       function resetLightbox() {
+        lightboxLoadId += 1;
         document.body.classList.remove("lightbox-open");
+        lightbox.classList.remove("is-loaded", "is-error");
+        lightboxPreview.removeAttribute("src");
         lightboxImg.removeAttribute("src");
         lightboxImg.alt = "";
+        lightboxImg.onload = null;
+        lightboxImg.onerror = null;
         activeTile?.focus();
         activeTile = undefined;
       }
