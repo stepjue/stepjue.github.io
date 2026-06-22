@@ -162,9 +162,14 @@ img {
 
 @media (max-width: 700px) {
   .grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
     padding: 100px 20px 60px;
+  }
+
+  .grid.is-mobile-sequence > .column {
+    display: none;
   }
 
   .column {
