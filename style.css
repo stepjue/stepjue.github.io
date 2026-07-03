@@ -79,20 +79,86 @@ img {
   text-decoration: underline;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 120px 24px 60px;
 }
 
-.column {
+.portfolio-section {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   min-width: 0;
+}
+
+.featured-project {
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+.selected-work {
+  gap: 24px;
+}
+
+.section-heading {
+  margin: 0;
+  border-top: 1px solid #111;
+  padding-top: 14px;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.featured-project .section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.section-status {
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  opacity: 0.55;
+  text-transform: lowercase;
+}
+
+.project-note {
+  max-width: 36em;
+  margin: 0 0 4px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.project-spotlight {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(180px, 0.55fr)
+    minmax(150px, 0.45fr);
+  align-items: start;
+  gap: 16px;
+}
+
+.portfolio-grid {
+  column-count: 2;
+  column-gap: 24px;
+}
+
+.portfolio-grid .tile {
+  margin-bottom: 24px;
+  break-inside: avoid;
+}
+
+.portfolio-grid .tile:last-child {
+  margin-bottom: 0;
 }
 
 .tile {
@@ -161,19 +227,37 @@ img {
 }
 
 @media (max-width: 700px) {
-  .grid {
-    display: flex;
-    flex-direction: column;
+  .portfolio {
     gap: 20px;
     padding: 100px 20px 60px;
   }
 
-  .grid.is-mobile-sequence > .column {
-    display: none;
+  .portfolio-grid {
+    column-count: 1;
+    column-gap: 0;
   }
 
-  .column {
-    gap: 20px;
+  .portfolio-grid .tile {
+    margin-bottom: 20px;
+  }
+
+  .featured-project {
+    gap: 12px;
+    padding-bottom: 8px;
+  }
+
+  .featured-project .section-heading {
+    display: block;
+  }
+
+  .section-status {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .project-spotlight {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
 
