@@ -102,6 +102,7 @@ img {
 .featured-project {
   gap: 0;
   padding-bottom: 0;
+  --project-item-gap: 16px;
   --project-offset: 0px;
   --project-item-height: clamp(280px, 34vw, 420px);
 }
@@ -147,7 +148,7 @@ img {
 
 .project-spotlight {
   display: flex;
-  gap: 16px;
+  gap: 0;
   align-items: flex-start;
   width: max-content;
   transform: translate3d(calc(-1 * var(--project-offset)), 0, 0);
@@ -159,6 +160,10 @@ img {
   width: auto;
   height: var(--project-item-height);
   overflow: visible;
+}
+
+.project-spotlight .tile + .tile {
+  margin-left: var(--project-item-gap);
 }
 
 .project-spotlight .tile > img,
@@ -340,6 +345,11 @@ img {
 
   .project-spotlight .tile {
     flex: 0 0 auto;
+  }
+
+  .project-spotlight .tile + .tile {
+    margin-top: var(--project-item-gap);
+    margin-left: 0;
   }
 
   .section-status {
