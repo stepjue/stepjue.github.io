@@ -49,8 +49,7 @@
     <link
       rel="preload"
       as="image"
-      href="images/other-photos/red-roof-church-thumb.webp"
-      type="image/webp"
+      href="images/other-photos/metal-surface-reflections-thumb.jpg"
       fetchpriority="high"
     />
     <script>
@@ -130,35 +129,16 @@
         <div class="portfolio-grid">
           <a
             class="tile"
-            href="images/other-photos/red-roof-church-web.jpg"
-            aria-label="View: White church with a bright red roof centered against sweeping hillsides"
-          >
-            <picture>
-              <source
-                srcset="images/other-photos/red-roof-church-thumb.webp"
-                type="image/webp"
-              />
-              <img
-                src="images/other-photos/red-roof-church-thumb.jpg"
-                width="1000"
-                height="667"
-                alt="White church with a bright red roof centered against sweeping hillsides"
-                loading="eager"
-                fetchpriority="high"
-              />
-            </picture>
-          </a>
-          <a
-            class="tile"
-            href="images/other-photos/ceiling-mirror-light-web.jpg"
-            aria-label="View: Ceiling mirror with an arc light fixture reflecting ground and a bench"
+            href="images/other-photos/metal-surface-reflections-web.jpg"
+            aria-label="View: Reflections across a weathered metal building surface"
           >
             <img
-              src="images/other-photos/ceiling-mirror-light-thumb.jpg"
+              src="images/other-photos/metal-surface-reflections-thumb.jpg"
               width="1000"
               height="1000"
-              alt="Ceiling mirror with an arc light fixture reflecting ground and a bench"
+              alt="Reflections across a weathered metal building surface"
               loading="eager"
+              fetchpriority="high"
             />
           </a>
           <a
@@ -176,17 +156,37 @@
           </a>
           <a
             class="tile"
-            href="images/other-photos/metal-surface-reflections-web.jpg"
-            aria-label="View: Reflections across a weathered metal building surface"
+            href="images/other-photos/ceiling-mirror-light-web.jpg"
+            aria-label="View: Ceiling mirror with an arc light fixture reflecting ground and a bench"
           >
             <img
-              src="images/other-photos/metal-surface-reflections-thumb.jpg"
+              src="images/other-photos/ceiling-mirror-light-thumb.jpg"
               width="1000"
               height="1000"
-              alt="Reflections across a weathered metal building surface"
+              alt="Ceiling mirror with an arc light fixture reflecting ground and a bench"
               loading="lazy"
               decoding="async"
             />
+          </a>
+          <a
+            class="tile"
+            href="images/other-photos/red-roof-church-web.jpg"
+            aria-label="View: White church with a bright red roof centered against sweeping hillsides"
+          >
+            <picture>
+              <source
+                srcset="images/other-photos/red-roof-church-thumb.webp"
+                type="image/webp"
+              />
+              <img
+                src="images/other-photos/red-roof-church-thumb.jpg"
+                width="1000"
+                height="667"
+                alt="White church with a bright red roof centered against sweeping hillsides"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </a>
         </div>
       </section>
@@ -210,8 +210,75 @@
       const lightboxPreview = document.getElementById("lightbox-preview");
       const lightboxImg = document.getElementById("lightbox-img");
       const closeButton = lightbox.querySelector(".lightbox-close");
+      const portfolioGrid = document.querySelector(".portfolio-grid");
+      const desktopGridQuery = window.matchMedia("(min-width: 701px)");
+      let masonryRaf = 0;
       let activeTile;
       let lightboxLoadId = 0;
+
+      function getImageRatio(img) {
+        const width = Number(img.getAttribute("width")) || img.naturalWidth;
+        const height = Number(img.getAttribute("height")) || img.naturalHeight;
+
+        if (!width || !height) return 1;
+
+        return width / height;
+      }
+
+      function layoutMasonryGrid() {
+        masonryRaf = 0;
+
+        if (!portfolioGrid) return;
+
+        const gridTiles = Array.from(portfolioGrid.querySelectorAll(".tile"));
+
+        if (!desktopGridQuery.matches) {
+          portfolioGrid.style.removeProperty("height");
+          gridTiles.forEach((tile) => {
+            tile.style.removeProperty("position");
+            tile.style.removeProperty("width");
+            tile.style.removeProperty("transform");
+            tile.style.removeProperty("grid-row-end");
+          });
+          return;
+        }
+
+        const styles = window.getComputedStyle(portfolioGrid);
+        const gap =
+          parseFloat(styles.getPropertyValue("--portfolio-grid-gap")) || 24;
+        const columnCount = 2;
+        const columnWidth =
+          (portfolioGrid.clientWidth - gap * (columnCount - 1)) / columnCount;
+        const columnHeights = new Array(columnCount).fill(0);
+
+        gridTiles.forEach((tile, index) => {
+          const img = tile.querySelector("img");
+          if (!img) return;
+
+          const column =
+            index < columnCount
+              ? index
+              : columnHeights.indexOf(Math.min(...columnHeights));
+          const x = column * (columnWidth + gap);
+          const y = columnHeights[column];
+          const expectedHeight = columnWidth / getImageRatio(img);
+
+          tile.style.position = "absolute";
+          tile.style.width = `${columnWidth}px`;
+          tile.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          tile.style.removeProperty("grid-row-end");
+
+          columnHeights[column] += expectedHeight + gap;
+        });
+
+        const height = Math.max(...columnHeights) - gap;
+        portfolioGrid.style.height = `${Math.max(0, height)}px`;
+      }
+
+      function requestMasonryLayout() {
+        if (masonryRaf) return;
+        masonryRaf = window.requestAnimationFrame(layoutMasonryGrid);
+      }
 
       tiles.forEach((tile) => {
         const thumbnail = tile.querySelector("img");
@@ -240,7 +307,10 @@
 
         function revealThumbnail() {
           const reveal = () => {
-            requestAnimationFrame(() => tile.classList.add("is-loaded"));
+            requestAnimationFrame(() => {
+              tile.classList.add("is-loaded");
+              requestMasonryLayout();
+            });
           };
 
           if (thumbnail.decode) {
@@ -256,7 +326,10 @@
           thumbnail.addEventListener("load", revealThumbnail, { once: true });
           thumbnail.addEventListener(
             "error",
-            () => tile.classList.add("is-loaded"),
+            () => {
+              tile.classList.add("is-loaded");
+              requestMasonryLayout();
+            },
             { once: true },
           );
         }
@@ -482,6 +555,17 @@
       window.addEventListener("load", requestProjectScrollSync);
       window.addEventListener("resize", requestProjectScrollSync);
 
+
+      if (portfolioGrid) {
+        const masonryResizeObserver = new ResizeObserver(requestMasonryLayout);
+        masonryResizeObserver.observe(portfolioGrid);
+      }
+
+      window.addEventListener("load", requestMasonryLayout);
+      window.addEventListener("resize", requestMasonryLayout);
+      desktopGridQuery.addEventListener("change", requestMasonryLayout);
+
+      requestMasonryLayout();
       requestProjectScrollSync();
     </script>
     <!-- Cloudflare Web Analytics -->
