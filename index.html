@@ -17,13 +17,13 @@
     <link
       rel="preload"
       as="image"
-      href="images/untitled/02-thumb.jpg"
+      href="images/field-index/shaped-evergreen-thumb.jpg"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      href="images/foss/thumbs/06.webp"
+      href="images/other-photos/red-roof-church-thumb.webp"
       type="image/webp"
       fetchpriority="high"
     />
@@ -42,55 +42,56 @@
     <main class="portfolio" aria-label="Photography portfolio">
       <section
         class="portfolio-section featured-project"
-        aria-labelledby="untitled-title"
+        aria-labelledby="field-index-title"
       >
-        <h2 class="section-heading" id="untitled-title">
-          Field Index <span class="section-status">ongoing</span>
-        </h2>
-        <p class="project-note">Scenes recorded as found.</p>
-        <div class="project-spotlight">
-          <a
-            class="tile project-cover"
-            href="images/untitled/02-web.jpg"
-            aria-label="View: Shaped evergreen beside a building wall and empty parking lot"
-          >
-            <img
-              src="images/untitled/02-thumb.jpg"
-              width="1000"
-              height="750"
-              alt="Shaped evergreen beside a building wall and empty parking lot"
-              loading="eager"
-              fetchpriority="high"
-            />
-          </a>
-          <a
-            class="tile"
-            href="images/untitled/01-web.jpg"
-            aria-label="View: Green utility box isolated in a field"
-          >
-            <img
-              src="images/untitled/01-thumb.jpg"
-              width="1000"
-              height="1000"
-              alt="Green utility box isolated in a field"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
-          <a
-            class="tile"
-            href="images/untitled/03-web.jpg"
-            aria-label="View: Door set high on a red metal wall"
-          >
-            <img
-              src="images/untitled/03-thumb.jpg"
-              width="562"
-              height="1000"
-              alt="Door set high on a red metal wall"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
+        <div class="project-scroll-frame">
+          <h2 class="section-heading" id="field-index-title">
+            Field Index <span class="section-status">ongoing observations</span>
+          </h2>
+          <div class="project-spotlight">
+            <a
+              class="tile project-cover"
+              href="images/field-index/shaped-evergreen-web.jpg"
+              aria-label="View: Shaped evergreen beside a building wall and empty parking lot"
+            >
+              <img
+                src="images/field-index/shaped-evergreen-thumb.jpg"
+                width="1000"
+                height="750"
+                alt="Shaped evergreen beside a building wall and empty parking lot"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </a>
+            <a
+              class="tile"
+              href="images/field-index/green-utility-box-web.jpg"
+              aria-label="View: Green utility box isolated in a field"
+            >
+              <img
+                src="images/field-index/green-utility-box-thumb.jpg"
+                width="1000"
+                height="1000"
+                alt="Green utility box isolated in a field"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <a
+              class="tile"
+              href="images/field-index/red-wall-door-web.jpg"
+              aria-label="View: Door set high on a red metal wall"
+            >
+              <img
+                src="images/field-index/red-wall-door-thumb.jpg"
+                width="562"
+                height="1000"
+                alt="Door set high on a red metal wall"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -103,13 +104,13 @@
         <div class="portfolio-grid">
           <a
             class="tile"
-            href="images/foss/web/06.jpg"
+            href="images/other-photos/red-roof-church-web.jpg"
             aria-label="View: White church with a bright red roof centered against sweeping hillsides"
           >
             <picture>
-              <source srcset="images/foss/thumbs/06.webp" type="image/webp" />
+              <source srcset="images/other-photos/red-roof-church-thumb.webp" type="image/webp" />
               <img
-                src="images/foss/thumbs/06.jpg"
+                src="images/other-photos/red-roof-church-thumb.jpg"
                 width="1000"
                 height="667"
                 alt="White church with a bright red roof centered against sweeping hillsides"
@@ -118,30 +119,44 @@
               />
             </picture>
           </a>
-          <a class="tile" href="images/mit/02-web.jpg">
+          <a
+            class="tile"
+            href="images/other-photos/ceiling-mirror-light-web.jpg"
+            aria-label="View: Ceiling mirror with an arc light fixture reflecting ground and a bench"
+          >
             <img
-              src="images/mit/02-thumb.jpg"
+              src="images/other-photos/ceiling-mirror-light-thumb.jpg"
               width="1000"
               height="1000"
+              alt="Ceiling mirror with an arc light fixture reflecting ground and a bench"
               loading="lazy"
               decoding="async"
             />
           </a>
-          <a class="tile" href="images/periphery/03-web-1.jpg">
+          <a
+            class="tile"
+            href="images/other-photos/layered-building-window-web.jpg"
+            aria-label="View: Window and layered building surfaces beneath an overcast sky"
+          >
             <img
-              src="images/periphery/03-thumb-1.jpg"
+              src="images/other-photos/layered-building-window-thumb.jpg"
               width="1000"
               height="750"
+              alt="Window and layered building surfaces beneath an overcast sky"
               loading="lazy"
               decoding="async"
-              fetchpriority="high"
             />
           </a>
-          <a class="tile" href="images/mit/01-web.jpg">
+          <a
+            class="tile"
+            href="images/other-photos/metal-surface-reflections-web.jpg"
+            aria-label="View: Reflections across a weathered metal building surface"
+          >
             <img
-              src="images/mit/01-thumb.jpg"
+              src="images/other-photos/metal-surface-reflections-thumb.jpg"
               width="1000"
               height="1000"
+              alt="Reflections across a weathered metal building surface"
               loading="lazy"
               decoding="async"
             />
@@ -204,6 +219,7 @@
           activeTile = tile;
           lightbox.classList.remove("is-loaded", "is-error");
           lightboxPreview.src = thumbnail.currentSrc || thumbnail.src;
+          lightboxPreview.alt = thumbnail.alt;
           lightboxImg.alt = thumbnail.alt;
           lightboxImg.removeAttribute("src");
           document.body.classList.add("lightbox-open");
@@ -242,6 +258,7 @@
         lightbox.classList.remove("is-loaded", "is-error");
         lightboxPreview.removeAttribute("src");
         lightboxImg.removeAttribute("src");
+        lightboxPreview.alt = "";
         lightboxImg.alt = "";
         lightboxImg.onload = null;
         lightboxImg.onerror = null;
@@ -262,6 +279,158 @@
       emailLink.href = `mailto:${email}`;
       emailLink.textContent = "contact";
       document.getElementById("email").append(emailLink);
+
+      const featuredProject = document.querySelector(".featured-project");
+      const projectScrollFrame =
+        featuredProject?.querySelector(".project-scroll-frame");
+      const projectSpotlight =
+        featuredProject?.querySelector(".project-spotlight");
+      const desktopProjectQuery = window.matchMedia("(min-width: 701px)");
+      let projectScrollRaf = 0;
+      let projectWheelRaf = 0;
+      let projectWheelDelta = 0;
+      let projectOffset = 0;
+
+      function getProjectMaxOffset() {
+        if (!projectScrollFrame || !projectSpotlight) return 0;
+
+        return Math.max(
+          0,
+          projectSpotlight.scrollWidth - projectScrollFrame.clientWidth,
+        );
+      }
+
+      function setProjectOffset(offset) {
+        if (!featuredProject) return;
+
+        projectOffset = Math.min(Math.max(offset, 0), getProjectMaxOffset());
+        featuredProject.style.setProperty(
+          "--project-offset",
+          `${projectOffset}px`,
+        );
+      }
+
+      function syncProjectScroll() {
+        projectScrollRaf = 0;
+
+        if (!featuredProject || !projectScrollFrame || !projectSpotlight) {
+          return;
+        }
+
+        if (!desktopProjectQuery.matches) {
+          setProjectOffset(0);
+          return;
+        }
+
+        setProjectOffset(projectOffset);
+      }
+
+      function requestProjectScrollSync() {
+        if (projectScrollRaf) return;
+        projectScrollRaf = window.requestAnimationFrame(syncProjectScroll);
+      }
+
+      function scrollProjectBy(delta) {
+        if (!desktopProjectQuery.matches || !featuredProject) {
+          return;
+        }
+
+        setProjectOffset(projectOffset + delta);
+        requestProjectScrollSync();
+      }
+
+      function handleProjectWheel(event) {
+        if (!desktopProjectQuery.matches || event.ctrlKey) {
+          return;
+        }
+
+        const dominantDelta =
+          Math.abs(event.deltaX) > Math.abs(event.deltaY)
+            ? event.deltaX
+            : event.deltaY;
+        const maxOffset = getProjectMaxOffset();
+
+        if (
+          !dominantDelta ||
+          maxOffset <= 0 ||
+          (dominantDelta < 0 && projectOffset <= 0) ||
+          (dominantDelta > 0 && projectOffset >= maxOffset)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        const delta =
+          event.deltaMode === WheelEvent.DOM_DELTA_LINE
+            ? dominantDelta * 16
+            : dominantDelta;
+
+        projectWheelDelta += delta;
+        if (projectWheelRaf) return;
+        projectWheelRaf = window.requestAnimationFrame(() => {
+          const nextDelta = projectWheelDelta;
+          projectWheelDelta = 0;
+          projectWheelRaf = 0;
+          scrollProjectBy(nextDelta);
+        });
+      }
+
+      function handleProjectKeydown(event) {
+        if (!desktopProjectQuery.matches) {
+          return;
+        }
+
+        const maxOffset = getProjectMaxOffset();
+        if (maxOffset <= 0) {
+          return;
+        }
+
+        const keyOffsets = {
+          ArrowLeft: -80,
+          ArrowUp: -80,
+          ArrowRight: 80,
+          ArrowDown: 80,
+          Home: -projectOffset,
+          End: maxOffset - projectOffset,
+        };
+        const delta = keyOffsets[event.key];
+
+        if (delta === undefined) {
+          return;
+        }
+
+        const nextOffset = Math.min(
+          Math.max(projectOffset + delta, 0),
+          maxOffset,
+        );
+
+        if (nextOffset === projectOffset) {
+          return;
+        }
+
+        event.preventDefault();
+        setProjectOffset(nextOffset);
+      }
+
+      const projectResizeObserver = new ResizeObserver(requestProjectScrollSync);
+
+      if (projectSpotlight) {
+        projectResizeObserver.observe(projectSpotlight);
+      }
+
+      if (projectScrollFrame) {
+        projectResizeObserver.observe(projectScrollFrame);
+        projectScrollFrame.addEventListener("wheel", handleProjectWheel, {
+          passive: false,
+        });
+        projectScrollFrame.addEventListener("keydown", handleProjectKeydown);
+      }
+
+      desktopProjectQuery.addEventListener("change", requestProjectScrollSync);
+      window.addEventListener("load", requestProjectScrollSync);
+      window.addEventListener("resize", requestProjectScrollSync);
+
+      requestProjectScrollSync();
     </script>
     <!-- Cloudflare Web Analytics -->
     <script

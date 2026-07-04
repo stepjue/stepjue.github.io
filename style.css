@@ -75,6 +75,11 @@ img {
   outline: none;
 }
 
+.tile:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
 .lightbox-close:focus-visible {
   text-decoration: underline;
 }
@@ -95,8 +100,10 @@ img {
 }
 
 .featured-project {
-  gap: 12px;
-  padding-bottom: 20px;
+  gap: 0;
+  padding-bottom: 0;
+  --project-offset: 0px;
+  --project-item-height: clamp(280px, 34vw, 420px);
 }
 
 .selected-work {
@@ -130,21 +137,50 @@ img {
   text-transform: lowercase;
 }
 
-.project-note {
-  max-width: 36em;
-  margin: 0 0 4px;
-  font-size: 15px;
-  line-height: 1.35;
+.project-scroll-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 .project-spotlight {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(180px, 0.55fr)
-    minmax(150px, 0.45fr);
-  align-items: start;
+  display: flex;
   gap: 16px;
+  align-items: flex-start;
+  width: max-content;
+  transform: translate3d(calc(-1 * var(--project-offset)), 0, 0);
+  will-change: transform;
+}
+
+.project-spotlight .tile {
+  flex: 0 0 auto;
+  width: auto;
+  height: var(--project-item-height);
+  overflow: visible;
+}
+
+.project-spotlight .tile > img,
+.project-spotlight .tile picture > img {
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-spotlight picture {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.project-spotlight .tile picture > img {
+  height: 100%;
+}
+
+.js .project-spotlight .tile img {
+  transform: none;
 }
 
 .portfolio-grid {
@@ -227,6 +263,18 @@ img {
 }
 
 @media (max-width: 700px) {
+  body::before {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100px;
+    background: #fff;
+    content: "";
+    pointer-events: none;
+  }
+
   .portfolio {
     gap: 20px;
     padding: 100px 20px 60px;
@@ -242,22 +290,61 @@ img {
   }
 
   .featured-project {
-    gap: 12px;
-    padding-bottom: 8px;
+    gap: 0;
+    padding-bottom: 0;
   }
 
   .featured-project .section-heading {
-    display: block;
+    display: flex;
+    position: sticky;
+    z-index: 4;
+    top: 72px;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    background: #fff;
   }
 
-  .section-status {
-    display: block;
-    margin-top: 8px;
+  .featured-project {
+    min-height: auto;
+    --project-offset: 0px;
+  }
+
+  .project-scroll-frame {
+    overflow: visible;
+    position: static;
   }
 
   .project-spotlight {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    flex-direction: column;
+    width: 100%;
+    transform: none;
+    will-change: auto;
+  }
+
+  .project-spotlight .tile,
+  .project-spotlight picture,
+  .project-spotlight img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .project-spotlight .tile > img,
+  .project-spotlight .tile picture > img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .project-spotlight .tile {
+    flex: 0 0 auto;
+  }
+
+  .section-status {
+    flex: 0 1 auto;
+    text-align: right;
   }
 }
 
