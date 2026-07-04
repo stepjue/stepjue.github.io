@@ -71,7 +71,8 @@
       >
         <div class="project-scroll-frame">
           <h2 class="section-heading" id="field-index-title">
-            Field Index <span class="section-status">ongoing observations</span>
+            Field Log
+            <span class="section-status">current record</span>
           </h2>
           <div class="project-spotlight">
             <a
@@ -554,7 +555,6 @@
       desktopProjectQuery.addEventListener("change", requestProjectScrollSync);
       window.addEventListener("load", requestProjectScrollSync);
       window.addEventListener("resize", requestProjectScrollSync);
-
 
       if (portfolioGrid) {
         const masonryResizeObserver = new ResizeObserver(requestMasonryLayout);
