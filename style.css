@@ -108,7 +108,7 @@ img {
 }
 
 .selected-work {
-  gap: 24px;
+  gap: 12px;
 }
 
 .section-heading {
@@ -157,7 +157,7 @@ img {
 
 .project-spotlight .tile {
   flex: 0 0 auto;
-  width: auto;
+  width: calc(var(--project-item-height) * var(--project-item-ratio, 1));
   height: var(--project-item-height);
   overflow: visible;
 }
@@ -168,7 +168,7 @@ img {
 
 .project-spotlight .tile > img,
 .project-spotlight .tile picture > img {
-  width: auto;
+  width: 100%;
   max-width: none;
   height: 100%;
   object-fit: contain;

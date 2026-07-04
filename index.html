@@ -18,11 +18,11 @@
     <meta property="og:url" content="https://stephenjue.com/" />
     <meta
       property="og:image"
-      content="https://stephenjue.com/images/field-index/shaped-evergreen-web.jpg"
+      content="images/other-photos/metal-surface-reflections-web.jpg"
     />
     <meta
       property="og:image:alt"
-      content="Shaped evergreen beside a building wall and empty parking lot"
+      content="Reflections across a weathered metal building surface"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Stephen Jue" />
@@ -32,7 +32,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://stephenjue.com/images/field-index/shaped-evergreen-web.jpg"
+      content="images/other-photos/metal-surface-reflections-web.jpg"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
     <link
       rel="preload"
       as="image"
-      href="images/field-index/shaped-evergreen-thumb.jpg"
+      href="images/field-index/green-utility-box-thumb.jpg"
       fetchpriority="high"
     />
     <link
@@ -77,20 +77,6 @@
           <div class="project-spotlight">
             <a
               class="tile project-cover"
-              href="images/field-index/shaped-evergreen-web.jpg"
-              aria-label="View: Shaped evergreen beside a building wall and empty parking lot"
-            >
-              <img
-                src="images/field-index/shaped-evergreen-thumb.jpg"
-                width="1000"
-                height="750"
-                alt="Shaped evergreen beside a building wall and empty parking lot"
-                loading="eager"
-                fetchpriority="high"
-              />
-            </a>
-            <a
-              class="tile"
               href="images/field-index/green-utility-box-web.jpg"
               aria-label="View: Green utility box isolated in a field"
             >
@@ -99,6 +85,20 @@
                 width="1000"
                 height="1000"
                 alt="Green utility box isolated in a field"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </a>
+            <a
+              class="tile"
+              href="images/field-index/shaped-evergreen-web.jpg"
+              aria-label="View: Shaped evergreen beside a building wall and empty parking lot"
+            >
+              <img
+                src="images/field-index/shaped-evergreen-thumb.jpg"
+                width="1000"
+                height="750"
+                alt="Shaped evergreen beside a building wall and empty parking lot"
                 loading="lazy"
                 decoding="async"
               />
@@ -134,7 +134,10 @@
             aria-label="View: White church with a bright red roof centered against sweeping hillsides"
           >
             <picture>
-              <source srcset="images/other-photos/red-roof-church-thumb.webp" type="image/webp" />
+              <source
+                srcset="images/other-photos/red-roof-church-thumb.webp"
+                type="image/webp"
+              />
               <img
                 src="images/other-photos/red-roof-church-thumb.jpg"
                 width="1000"
@@ -212,6 +215,28 @@
 
       tiles.forEach((tile) => {
         const thumbnail = tile.querySelector("img");
+
+        if (tile.closest(".project-spotlight") && thumbnail) {
+          function setProjectItemRatio() {
+            const width =
+              Number(thumbnail.getAttribute("width")) || thumbnail.naturalWidth;
+            const height =
+              Number(thumbnail.getAttribute("height")) ||
+              thumbnail.naturalHeight;
+
+            if (!width || !height) return;
+
+            tile.style.setProperty("--project-item-ratio", width / height);
+          }
+
+          setProjectItemRatio();
+
+          if (!thumbnail.complete) {
+            thumbnail.addEventListener("load", setProjectItemRatio, {
+              once: true,
+            });
+          }
+        }
 
         function revealThumbnail() {
           const reveal = () => {
@@ -305,8 +330,9 @@
       document.getElementById("email").append(emailLink);
 
       const featuredProject = document.querySelector(".featured-project");
-      const projectScrollFrame =
-        featuredProject?.querySelector(".project-scroll-frame");
+      const projectScrollFrame = featuredProject?.querySelector(
+        ".project-scroll-frame",
+      );
       const projectSpotlight =
         featuredProject?.querySelector(".project-spotlight");
       const desktopProjectQuery = window.matchMedia("(min-width: 701px)");
@@ -436,7 +462,9 @@
         setProjectOffset(nextOffset);
       }
 
-      const projectResizeObserver = new ResizeObserver(requestProjectScrollSync);
+      const projectResizeObserver = new ResizeObserver(
+        requestProjectScrollSync,
+      );
 
       if (projectSpotlight) {
         projectResizeObserver.observe(projectSpotlight);
