@@ -138,6 +138,14 @@ img {
   text-transform: lowercase;
 }
 
+.section-description {
+  max-width: 56ch;
+  margin: -2px 0 2px;
+  font-size: 13px;
+  line-height: 1.35;
+  opacity: 0.62;
+}
+
 .project-scroll-frame {
   display: flex;
   flex-direction: column;
@@ -182,6 +190,31 @@ img {
 
 .project-spotlight .tile picture > img {
   height: 100%;
+}
+
+.diptych-project .project-spotlight {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--project-item-gap);
+  align-items: stretch;
+  width: 100%;
+  transform: none;
+  will-change: auto;
+}
+
+.diptych-project .project-spotlight .tile {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.diptych-project .project-spotlight .tile + .tile {
+  margin-left: 0;
+}
+
+.diptych-project .project-spotlight .tile > img {
+  object-fit: cover;
 }
 
 .js .project-spotlight .tile img {
@@ -326,6 +359,10 @@ img {
     width: 100%;
     transform: none;
     will-change: auto;
+  }
+
+  .diptych-project .project-spotlight {
+    display: flex;
   }
 
   .project-spotlight .tile,

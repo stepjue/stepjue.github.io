@@ -66,7 +66,53 @@
 
     <main class="portfolio" aria-label="Photography portfolio">
       <section
-        class="portfolio-section featured-project"
+        class="portfolio-section featured-project diptych-project"
+        aria-labelledby="planes-pleasure-bay-title"
+        aria-describedby="planes-pleasure-bay-description"
+      >
+        <div class="project-scroll-frame">
+          <h2 class="section-heading" id="planes-pleasure-bay-title">
+            Planes over Pleasure Bay
+          </h2>
+          <p class="section-description" id="planes-pleasure-bay-description">
+            Night flights over Pleasure Bay, photographed while following the
+            planes by hand.
+          </p>
+          <div class="project-spotlight">
+            <a
+              class="tile project-cover"
+              href="images/planes-pleasure-bay/01-web.jpg"
+              aria-label="View: Planes over Pleasure Bay 1"
+            >
+              <img
+                src="images/planes-pleasure-bay/01-thumb.jpg"
+                width="1000"
+                height="1000"
+                alt="Planes over Pleasure Bay 1"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </a>
+            <a
+              class="tile"
+              href="images/planes-pleasure-bay/02-web.jpg"
+              aria-label="View: Planes over Pleasure Bay 2"
+            >
+              <img
+                src="images/planes-pleasure-bay/02-thumb.jpg"
+                width="1000"
+                height="1000"
+                alt="Planes over Pleasure Bay 2"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="portfolio-section featured-project scroll-project"
         aria-labelledby="field-index-title"
       >
         <div class="project-scroll-frame">
@@ -403,7 +449,7 @@
       emailLink.textContent = "contact";
       document.getElementById("email").append(emailLink);
 
-      const featuredProject = document.querySelector(".featured-project");
+      const featuredProject = document.querySelector(".scroll-project");
       const projectScrollFrame = featuredProject?.querySelector(
         ".project-scroll-frame",
       );
@@ -468,6 +514,10 @@
           return;
         }
 
+        if (!isWithinProjectScrollZone(event)) {
+          return;
+        }
+
         const dominantDelta =
           Math.abs(event.deltaX) > Math.abs(event.deltaY)
             ? event.deltaX
@@ -497,6 +547,19 @@
           projectWheelRaf = 0;
           scrollProjectBy(nextDelta);
         });
+      }
+
+      function isWithinProjectScrollZone(event) {
+        if (
+          !projectScrollFrame ||
+          document.body.classList.contains("lightbox-open")
+        ) {
+          return false;
+        }
+
+        const rect = projectScrollFrame.getBoundingClientRect();
+
+        return event.clientY >= rect.top && event.clientY <= rect.bottom;
       }
 
       function handleProjectKeydown(event) {
@@ -546,13 +609,11 @@
 
       if (projectScrollFrame) {
         projectResizeObserver.observe(projectScrollFrame);
-        projectScrollFrame.addEventListener("wheel", handleProjectWheel, {
-          passive: false,
-        });
         projectScrollFrame.addEventListener("keydown", handleProjectKeydown);
       }
 
       desktopProjectQuery.addEventListener("change", requestProjectScrollSync);
+      window.addEventListener("wheel", handleProjectWheel, { passive: false });
       window.addEventListener("load", requestProjectScrollSync);
       window.addEventListener("resize", requestProjectScrollSync);
 
